@@ -1,36 +1,36 @@
 #ifndef CARD_H
 #define CARD_H
 
-using namespace std;
 #include <iostream>
+#include <memory>
 #include "cardeffect.h"
 
-class card
-{
+using namespace std;
 
+class card {
 private:
     int rank;
     string color;
     string name;
-    CardEffect effect;
+    shared_ptr<CardEffect> effect; //Use polymorphism for card effects.
 
     string createName();
 
 public:
     card();
-    card(int rank, string color);
+    card(int rank, string color, shared_ptr<CardEffect> effect = nullptr);
 
-    int get_rank();
+    int get_rank() const;
     void set_rank(int rank);
 
-    string get_color();
+    string get_color() const;
     void set_color(string color);
 
-    string get_name();
+    string get_name() const;
     void set_name(string name);
 
-    CardEffect get_effect();
-    void set_effect(CardEffect effect);
+    shared_ptr<CardEffect> get_effect() const;
+    void set_effect(shared_ptr<CardEffect> effect);
 };
 
 #endif // CARD_H
