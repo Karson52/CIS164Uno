@@ -10,6 +10,8 @@ class card
 private:
     int rank;
     string color;
+    string name;
+
 public:
     card();
     card(int rank, string color);
@@ -19,6 +21,9 @@ public:
 
     string get_color();
     void set_color(string color);
+
+    string get_name();
+    void set_name(string name);
 
 
 };

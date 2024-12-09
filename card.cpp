@@ -24,3 +24,11 @@ string card::get_color(){
 void card::set_color(string color){
     this->color = color;
 }
+
+string card::get_name(){
+    return name;
+}
+
+void card::set_name(string name){
+    this->name = name;
+}
