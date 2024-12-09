@@ -6,6 +6,7 @@ Deck::Deck() {
 }
 
 // TODO: write a function to place all of the cards into the deck
+// should total to 108 cards
 void Deck::fillDeck(){
     return;
 }
