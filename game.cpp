@@ -53,7 +53,10 @@ void Game::takeTurn(){
     turnIndex += turnDirection;
 
 }
-
+// TODO: handle any card effects we might get back from player.takeTurn();
 void handleCardEffect(CardEffect effect){
-
+    // Uno reverse should multiply turn direction by -1.
+    // draw four and draw two cause next player to draw cards.
+    // skip should perform turnIndex+=turnDirection an extra time
+    // wild should ask player to select the new color/suit
 }
