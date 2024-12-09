@@ -12,7 +12,7 @@ class Game
 {
 private:
 
-    vector<Player> players;
+    vector<Player*> players;
 
     Deck drawDeck;
     Deck playedDeck;

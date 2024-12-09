@@ -8,7 +8,8 @@ class Deck
 {
 private:
 
-    vector<card> cards;
+    // vector of pointers to card objects
+    vector<card*> cards;
 
 
 public:
@@ -17,9 +18,9 @@ public:
 
     void fillDeck();
     void shuffle();
-    card drawCard();
-    card peekCard();
-    void playCard(card playedCard);
+    card *drawCard();
+    card *peekCard();
+    void playCard(card* playedCard);
     bool isEmpty();
 
 };
