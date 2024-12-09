@@ -1,9 +1,24 @@
 #include "cardeffect.h"
+#include "game.h" //Include to access the Game class functionality.
 
-// This class should be inherited by all of the card effect classes. we will have a class for each effect
-// which has a function as it's member called activateEffect that gets called by the game class when the
-// object gets returned to it after the player's turn. that function will perform the card's effect.
-// Might be best to just pass the game object into this function by reference and then use game's getters and
-// setters within the activateEffect function.
+void SkipEffect::activateEffect(Game& game) {
+    //Skip the next player's turn by adjusting the turn index.
+    game.adjustTurnIndex(1); // Skip one turn.
+}
 
-CardEffect::CardEffect() {}
+void ReverseEffect::activateEffect(Game& game) {
+    // Reverse the direction of play.
+    game.reverseTurnDirection();
+}
+
+void DrawTwoEffect::activateEffect(Game& game) {
+    //Make the next player draw two cards.
+    for (int i = 0; i < 2; i++) {
+        game.drawCardForNextPlayer();
+    }
+}
+
+void WildEffect::activateEffect(Game& game) {
+    //Allow the player to choose a new color.
+    game.setWildColor();
+}
