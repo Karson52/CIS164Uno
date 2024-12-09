@@ -40,12 +40,12 @@ void Game::takeTurn(){
     currentPlayer = turnIndex%playerCount;
 
     // player.takeTurn() will perform the player's turn actions and return any required card effects.
-    effect = players[currentPlayer].takeTurn();
+    effect = players[currentPlayer]->takeTurn();
 
     // handle any card effects we need to
     handleCardEffect(effect);
 
-    if(players[currentPlayer].hasWon()){
+    if(players[currentPlayer]->hasWon()){
         // do something to end the game
     }
 
