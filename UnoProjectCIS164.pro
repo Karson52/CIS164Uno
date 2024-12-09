@@ -8,8 +8,11 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
         card.cpp \
+        cardeffect.cpp \
         deck.cpp \
-        main.cpp
+        game.cpp \
+        main.cpp \
+        player.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -18,4 +21,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     card.h \
-    deck.h
+    cardeffect.h \
+    deck.h \
+    game.h \
+    player.h
