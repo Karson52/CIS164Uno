@@ -1,6 +1,8 @@
 #include "game.h"
-
+#include "player.h"
 #include "cardeffect.h"
+
+using namespace std;
 
 Game::Game() {
     // Variables for controlling which player's turn it is.
@@ -14,8 +16,10 @@ Game::Game() {
     turnDirection = 1;
     // not sure yet if we want this variable here, or if it can be within the scope of takeTurn.
     currentPlayer = 0;
+    maxPlayers = 4;
+    gameWon = false;
 
-    // This is the deck players will be drawing cards from.
+    // This is the deck players will be drawing card from.
     drawDeck = Deck();
 
     // This is the deck players will be playing cards onto.
@@ -34,7 +38,6 @@ void Game::setUp(){
 }
 
 void Game::takeTurn(){
-    CardEffect effect;
 
     // figure out who's turn it is.
     currentPlayer = turnIndex%playerCount;
@@ -52,6 +55,26 @@ void Game::takeTurn(){
     // adjust the turnIndex
     turnIndex += turnDirection;
 
+}
+void Game::play()
+{
+    // Set up the game by preparing decks and players.
+    setUp();
+    gameWon = false;
+
+    // Main game loop.
+    while (!gameWon)
+    {
+        takeTurn();
+
+        // Check if the draw deck is empty and needs to be repfilled.
+        if (drawDeck.isEmpty()) {
+            drawDeck.fillDeck();
+        }
+    }
+}
+void Game::addPlayer(Player* player) {
+    players.push_back(player);
 }
 // TODO: handle any card effects we might get back from player.takeTurn();
 void handleCardEffect(CardEffect effect){

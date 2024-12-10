@@ -21,6 +21,9 @@ private:
     int turnIndex;
     int playerCount;
     int currentPlayer;
+    int maxPlayers;
+
+    bool gameWon;
 
     void handleCardEffect(CardEffect effect);
 
@@ -30,6 +33,9 @@ public:
 
     void setUp();
     void takeTurn();
+    void play();
+
+    void addPlayer(Player* player);
 };
 
 #endif // GAME_H

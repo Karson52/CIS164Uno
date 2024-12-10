@@ -21,7 +21,7 @@ public:
     Player(string name);
 
     bool hasWon();
-    CardEffect takeTurn(Deck &drawDeck, Deck &playedDeck);
+    CardEffect* takeTurn(Deck &drawDeck, Deck &playedDeck);
 
     string get_name();
     void set_name(string name);
