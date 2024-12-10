@@ -9,27 +9,16 @@ Player::Player() {
 Player::Player(string name){
     set_name(name);
 }
-// this is the function we will call on the player who's turn it is. They will chose to play a card or draw.
-CardEffect Player::takeTurn(Deck &drawDeck, Deck &playedDeck){
-    // holds the pointer of the card that the player choses to play.
-    card* cardPlayed;
-    // holds a pointer to the card that the player selects from their hand
-    card* cardSelsected;
-
-    cout << "It is " << name <<"'s Turn." << endl;
-
-    cout << "Face up card: " << playedDeck.peekCard() << endl;
-
-    cout << "Your hand: " << handToString() << endl;
-
-    cout << "Type 1 to play a card, 2 to draw a card";
+//this is the function we will call on the player who's turn it is. They will chose to play a card or draw.
+CardEffect Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
+    //Holds the pointer of the card that the player chooses to play.
+    card* cardPlayed = nullptr;
 
     cout << "It is " << name << "'s turn." << endl;
-    cout << "Face up card: " << faceUpCard->get_name() << endl;
-
+    cout << "Face up card: " << playedDeck.peekCard() << endl;
     cout << "Your hand: " << handToString() << endl;
 
-int choice;
+    int choice;
     do {
         cout << "Type 1 to play a card, or 2 to draw a card: ";
         cin >> choice;
@@ -42,12 +31,12 @@ int choice;
             if (cardIndex >= 0 && cardIndex < hand.size()) {
                 card* chosenCard = hand[cardIndex];
 
-                if (checkLegality(*chosenCard, *faceUpCard)) {
+                if (checkLegality(*chosenCard, *playedDeck.peekCard())) {
                     cardPlayed = chosenCard;
                     hand.erase(hand.begin() + cardIndex); //Remove the card from hand.
                     playedDeck.playCard(cardPlayed);      //Place the card on the played deck.
                     cout << "You played: " << cardPlayed->get_name() << endl;
-                    break;
+                    break;  //End turn after successfully playing a card.
                 } else {
                     cout << "That card cannot be played on the current face-up card." << endl;
                 }
@@ -56,16 +45,18 @@ int choice;
             }
         } else if (choice == 2) {
             card* drawnCard = drawDeck.drawCard();
-            hand.push_back(drawnCard);  //Add the drawn card to the player's hand.
+            hand.push_back(drawnCard);  // Add the drawn card to the player's hand.
             cout << "You drew a card: " << drawnCard->get_name() << endl;
-            //TODO maybe remove this line? turn shouldnt end after drawing
-            break;
+            //Continue the turn after drawing a card (no break here).
         } else {
             cout << "Invalid choice. Try again." << endl;
         }
     } while (true);
-    return cardPlayed->get_effect() : CardEffect(); //No effect if no card is played.
+
+    //Return the effect of the played card, or no effect if none was played.
+    return cardPlayed ? cardPlayed->get_effect() : CardEffect();
 }
+
 
 // TODO: write a function to validate if a card is playable or not by comparing it to the face up card.
 bool Player::checkLegality(card chosenCard, card faceUpCard){
