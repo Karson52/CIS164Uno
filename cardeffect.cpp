@@ -22,3 +22,7 @@ void WildEffect::activateEffect(Game& game) {
     //Allow the player to choose a new color.
     game.setWildColor();
 }
+
+void WildDrawFour::activateEffect(Game& game) {
+    // perform the wild draw four effects.
+}

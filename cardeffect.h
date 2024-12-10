@@ -42,4 +42,10 @@ public:
     string getName() const override { return "Wild"; }
 };
 
+class WildDrawFour : public CardEffect {
+public:
+    void activateEffect(Game& game) override;
+    string getName() const override { return "Wild Draw Four"; }
+};
+
 #endif // CARDEFFECT_H

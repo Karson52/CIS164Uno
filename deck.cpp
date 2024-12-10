@@ -1,6 +1,8 @@
 #include "deck.h"
 #include "card.h"
+#include "cardeffect.h"
 
+using namespace std;
 Deck::Deck() {
 
 }
@@ -8,6 +10,44 @@ Deck::Deck() {
 // TODO: write a function to place all of the cards into the deck
 // should total to 108 cards
 void Deck::fillDeck(){
+    string colors[] = {"Blue","Red","Yellow", "Green"};
+
+    for(int i = 0; i < 4; i++){
+        cards.push_back(new card(0, colors[i]));
+            for(int j = 1; j<10; j++){
+                // need two of each
+                cards.push_back(new card(j, colors[i]));
+                cards.push_back(new card(j, colors[i]));
+                }
+                // create cards with effects
+
+                // Create skip cards
+                shared_ptr<CardEffect> skip = make_shared<SkipEffect>();
+                cards.push_back(new card(10, colors[i], skip));
+                cards.push_back(new card(10, colors[i], skip));
+
+                // create reverse cards
+                shared_ptr<CardEffect> reverse = make_shared<ReverseEffect>();
+                cards.push_back(new card(11, colors[i], reverse));
+                cards.push_back(new card(11, colors[i], reverse));
+
+                // create drawTwo cards
+                shared_ptr<CardEffect> drawTwo = make_shared<DrawTwoEffect>();
+                cards.push_back(new card(12, colors[i], reverse));
+                cards.push_back(new card(12, colors[i], reverse));
+            }
+
+    // shared pointer for the wild effect
+    shared_ptr<CardEffect> wild = make_shared<WildEffect>();
+
+    // shared pointer for the wild draw four effect
+    shared_ptr<CardEffect> wildDrawFour = make_shared<WildDrawFour>();
+
+    // Loop for creating the wilds/draw fours
+    for(int i = 0; i<4; i++){
+        cards.push_back(new card(13, "Wild", wild));
+        cards.push_back(new card(14, "Wild", wildDrawFour));
+    }
     return;
 }
 
