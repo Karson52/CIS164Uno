@@ -86,7 +86,7 @@ void Game::deal() {
         }
     }
 }
-void Game::addPlayer(Player* player) {
+void Game::addPlayer(shared_ptr<Player> player) {
     players.push_back(player);
 }
 

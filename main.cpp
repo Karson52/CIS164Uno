@@ -16,7 +16,7 @@ int main()
 
     for (size_t i = 0; i < unoPlayers.size(); ++i)
     {
-        Player* newPlayer = new Player(unoPlayers[i]);
+        shared_ptr<Player> newPlayer (new Player(unoPlayers[i]));
         game.addPlayer(newPlayer); // Adds the new player to the game's vector.
     }
     // Run the game.

@@ -12,7 +12,7 @@ class Game
 {
 private:
 
-    vector<Player*> players;
+    vector<shared_ptr<Player>> players;
 
     Deck drawDeck;
     Deck playedDeck;
@@ -36,7 +36,7 @@ public:
     void setUp();
     void takeTurn();
     void play();
-    void addPlayer(Player* player);
+    void addPlayer(shared_ptr<Player> player);
     // getters and setters
     int get_turnIndex();
     void set_turnIndex(int index);
