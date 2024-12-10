@@ -1,6 +1,7 @@
 #include "game.h"
 #include "player.h"
 #include "cardeffect.h"
+#include <limits>
 
 using namespace std;
 
@@ -90,6 +91,38 @@ void Game::deal() {
             players[j]->draw(drawDeck.drawCard());
         }
     }
+}
+
+void Game::getWildChoice(){
+    bool gotInput = false;
+    int wildChoice;
+    do {
+        //Allow the player to choose a new color.
+        cout << "Select wild card color" << endl;
+        cout << "Please chose 0 for Blue, 1 for Red, 2 for Green, and 3 for Yellow" << endl;
+        cin >> wildChoice;
+        if(wildChoice==0){
+            playedDeck.peekCard()->set_wildColor("Blue");
+            gotInput = true;
+        }else if (wildChoice == 1){
+            playedDeck.peekCard()->set_wildColor("Red");
+            gotInput = true;
+        }else if (wildChoice == 2){
+            playedDeck.peekCard()->set_wildColor("Green");
+            gotInput = true;
+        }else if (wildChoice ==3){
+            playedDeck.peekCard()->set_wildColor("Yellow");
+            gotInput = true;
+        }
+        else{
+            cout<< "Invalid input";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        //game.setWildColor();
+    }
+    while(!gotInput);
+
 }
 void Game::addPlayer(shared_ptr<Player> player) {
     players.push_back(player);

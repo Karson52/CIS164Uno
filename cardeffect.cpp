@@ -24,10 +24,15 @@ void DrawTwoEffect::activateEffect(Game* game) {
 }
 
 void WildEffect::activateEffect(Game* game) {
-    //Allow the player to choose a new color.
-    //game.setWildColor();
+    game->getWildChoice();
+
+
 }
 
 void WildDrawFour::activateEffect(Game* game) {
     // perform the wild draw four effects.
+    for (int i = 0; i< 4; i++){
+        game->nextPlayerDraw();
+    }
+    game->getWildChoice();
 }

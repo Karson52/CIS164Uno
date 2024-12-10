@@ -19,7 +19,7 @@ shared_ptr<CardEffect> Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
 
     int choice;
     do {
-        cout << "Face up card: " << playedDeck.peekCard()->get_name() << endl;
+        cout << "Face up card: " << playedDeck.peekCard()->get_wildName() << endl;
         cout << "Your hand: " << handToString() << endl;
         cout << "Type 1 to play a card, or 2 to draw a card: ";
         cin >> choice;
@@ -70,7 +70,7 @@ bool Player::checkLegality(card chosenCard, card faceUpCard){
         return true;
     }
 
-    if (chosenCard.get_color() == faceUpCard.get_color()) {
+    if (chosenCard.get_color() == faceUpCard.get_wildColor()) {
         return true;
     }
 

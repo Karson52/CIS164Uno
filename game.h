@@ -45,6 +45,8 @@ public:
     void set_turnDirection(int direction);
 
     void nextPlayerDraw();
+
+    void getWildChoice();
 };
 
 #endif // GAME_H

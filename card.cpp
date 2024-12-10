@@ -1,9 +1,10 @@
 #include "card.h"
 
-card::card() : rank(-1), color("none"), name(""), effect(nullptr) {}
+card::card() : rank(-1), color("none"), name(""), effect(nullptr), wildColor("") {}
 
 card::card(int rank, string color, shared_ptr<CardEffect> effect)
     : rank(rank), color(color), effect(effect) {
+    wildColor = "";
     name = createName();
 }
 
@@ -48,4 +49,22 @@ shared_ptr<CardEffect> card::get_effect() const {
 void card::set_effect(shared_ptr<CardEffect> effect) {
     this->effect = effect;
     name = createName();
+}
+
+string card::get_wildColor(){
+    if(wildColor!=""){
+        return wildColor;
+    }
+    return color;
+}
+void card::set_wildColor(string suit){
+    this->wildColor = suit;
+}
+
+string card::get_wildName(){
+    string nameString = name;
+    if(wildColor!=""){
+        nameString.append("Color: " + wildColor);
+    }
+    return nameString;
 }

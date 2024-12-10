@@ -12,6 +12,7 @@ private:
     int rank;
     string color;
     string name;
+    string wildColor;
     shared_ptr<CardEffect> effect; //Use polymorphism for card effects.
 
     string createName();
@@ -31,6 +32,11 @@ public:
 
     shared_ptr<CardEffect> get_effect() const;
     void set_effect(shared_ptr<CardEffect> effect);
+
+    string get_wildColor();
+    void set_wildColor(string color);
+
+    string get_wildName();
 };
 
 #endif // CARD_H
