@@ -8,7 +8,7 @@ Game::Game() {
     // Variables for controlling which player's turn it is.
     // after turnIndex%playerCount we will know who's turn it should be
     // index itself is arbitrary, start at 10k to avoid the -mod bug
-    turnIndex = 0;
+    turnIndex = 10000;
     /*
      *  If counter clockwise play(due to a reverse card), we will have -1 turn direction.
      *  turnIndex += turnDirection will adjust turnIndex properly so that the correct player
@@ -18,6 +18,7 @@ Game::Game() {
     // not sure yet if we want this variable here, or if it can be within the scope of takeTurn.
     currentPlayer = 0;
     maxPlayers = 4;
+    playerCount = 4;
     gameWon = false;
 
     // This is the deck players will be drawing card from.
@@ -44,14 +45,18 @@ void Game::takeTurn(){
     shared_ptr<CardEffect> effect;
 
     // figure out who's turn it is.
-    currentPlayer = turnIndex%playerCount;
+
+    currentPlayer = turnIndex%maxPlayers;
 
     // player.takeTurn() will perform the player's turn actions and return any required card effects.
     effect = players[currentPlayer]->takeTurn(drawDeck, playedDeck);
 
     // handle any card effects we need to
     //handleCardEffect(effect);
-    effect->activateEffect(this);
+
+    if (!(effect == nullptr)){
+        effect->activateEffect(this);
+    }
 
     if(players[currentPlayer]->hasWon()){
         // do something to end the game

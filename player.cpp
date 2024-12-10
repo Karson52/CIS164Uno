@@ -66,7 +66,6 @@ shared_ptr<CardEffect> Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
 // TODO: write a function to validate if a card is playable or not by comparing it to the face up card.
 bool Player::checkLegality(card chosenCard, card faceUpCard){
     //compares the card played and the card on the top of the play deck
-    cout <<"check legality"<<endl;
     if (chosenCard.get_rank() == faceUpCard.get_rank()) {
         return true;
     }
