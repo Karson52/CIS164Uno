@@ -26,6 +26,7 @@ private:
     bool gameWon;
 
     void handleCardEffect(CardEffect* effect);
+    void deal();
 
 public:
 

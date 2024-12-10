@@ -19,7 +19,6 @@ int main()
         Player* newPlayer = new Player(unoPlayers[i]);
         game.addPlayer(newPlayer); // Adds the new player to the game's vector.
     }
-
     // Run the game.
     cout << "Starting the game!" << endl;
     game.play();

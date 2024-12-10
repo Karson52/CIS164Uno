@@ -35,6 +35,8 @@ void Game::setUp(){
 
     // flip a card from the draw deck to the played deck to be the initial face up card.
     playedDeck.playCard(drawDeck.drawCard());
+
+    deal();
 }
 
 void Game::takeTurn(){
@@ -75,17 +77,17 @@ void Game::play()
         }
     }
 }
+
+void Game::deal() {
+    for(int i = 0; i < 7; i++){
+        for(int j = 0; j < maxPlayers; j++){
+            players[j]->draw(drawDeck.drawCard());
+        }
+    }
+}
 void Game::addPlayer(Player* player) {
     players.push_back(player);
 }
-// TODO: handle any card effects we might get back from player.takeTurn();
-//void handleCardEffect(shared_ptr<CardEffect> effect){
-    //effect->activateEffect(activateEffect
-    // Uno reverse should multiply turn direction by -1.
-    // draw four and draw two cause next player to draw cards.
-    // skip should perform turnIndex+=turnDirection an extra time
-    // wild should ask player to select the new color/suit
-//}
 
 // getters and setters
 int Game::get_turnIndex(){
