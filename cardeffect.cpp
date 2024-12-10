@@ -19,7 +19,7 @@ void ReverseEffect::activateEffect(Game* game) {
 void DrawTwoEffect::activateEffect(Game* game) {
     //Make the next player draw two cards.
     for (int i = 0; i < 2; i++) {
-        //game.drawCardForNextPlayer();
+        game->nextPlayerDraw();
     }
 }
 

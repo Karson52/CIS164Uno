@@ -34,8 +34,8 @@ void Deck::fillDeck(){
 
                 // create drawTwo cards
                 shared_ptr<CardEffect> drawTwo = make_shared<DrawTwoEffect>();
-                cards.push_back(new card(12, colors[i], reverse));
-                cards.push_back(new card(12, colors[i], reverse));
+                cards.push_back(new card(12, colors[i], drawTwo));
+                cards.push_back(new card(12, colors[i], drawTwo));
             }
 
     // shared pointer for the wild effect

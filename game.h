@@ -43,6 +43,8 @@ public:
 
     int get_turnDirection();
     void set_turnDirection(int direction);
+
+    void nextPlayerDraw();
 };
 
 #endif // GAME_H

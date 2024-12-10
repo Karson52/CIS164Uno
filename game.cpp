@@ -95,6 +95,12 @@ void Game::addPlayer(shared_ptr<Player> player) {
     players.push_back(player);
 }
 
+void Game::nextPlayerDraw(){
+    int nextPlayer = currentPlayer + turnDirection;
+    cout << players[nextPlayer]->get_name() << " drew a " << drawDeck.peekCard()->get_name() << endl;
+    players[nextPlayer]->draw(drawDeck.drawCard());
+}
+
 // getters and setters
 int Game::get_turnIndex(){
     return turnIndex;
