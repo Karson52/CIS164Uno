@@ -38,15 +38,17 @@ void Game::setUp(){
 }
 
 void Game::takeTurn(){
+    shared_ptr<CardEffect> effect;
 
     // figure out who's turn it is.
     currentPlayer = turnIndex%playerCount;
 
     // player.takeTurn() will perform the player's turn actions and return any required card effects.
-    effect = players[currentPlayer]->takeTurn();
+    effect = players[currentPlayer]->takeTurn(drawDeck, playedDeck);
 
     // handle any card effects we need to
-    handleCardEffect(effect);
+    //handleCardEffect(effect);
+    effect->activateEffect(this);
 
     if(players[currentPlayer]->hasWon()){
         // do something to end the game
@@ -77,9 +79,27 @@ void Game::addPlayer(Player* player) {
     players.push_back(player);
 }
 // TODO: handle any card effects we might get back from player.takeTurn();
-void handleCardEffect(CardEffect effect){
+//void handleCardEffect(shared_ptr<CardEffect> effect){
+    //effect->activateEffect(activateEffect
     // Uno reverse should multiply turn direction by -1.
     // draw four and draw two cause next player to draw cards.
     // skip should perform turnIndex+=turnDirection an extra time
     // wild should ask player to select the new color/suit
+//}
+
+// getters and setters
+int Game::get_turnIndex(){
+    return turnIndex;
 }
+void Game::set_turnIndex(int index){
+    this->turnIndex = index;
+}
+
+int Game::get_turnDirection(){
+    return turnDirection;
+}
+
+void Game::set_turnDirection(int direction){
+    this->turnDirection = direction;
+}
+

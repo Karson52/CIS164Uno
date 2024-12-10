@@ -10,7 +10,7 @@ Player::Player(string name){
     set_name(name);
 }
 //this is the function we will call on the player who's turn it is. They will chose to play a card or draw.
-CardEffect* Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
+shared_ptr<CardEffect> Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
     //Holds the pointer of the card that the player chooses to play.
     card* cardPlayed = nullptr;
 
@@ -54,7 +54,8 @@ CardEffect* Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
     } while (true);
 
     //Return the effect of the played card, or no effect if none was played.
-    return cardPlayed ? cardPlayed->get_effect() : CardEffect();
+    //return cardPlayed ? cardPlayed->get_effect() : CardEffect();
+    return cardPlayed->get_effect();
 }
 
 

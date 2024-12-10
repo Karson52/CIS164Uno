@@ -25,17 +25,23 @@ private:
 
     bool gameWon;
 
-    void handleCardEffect(CardEffect effect);
+    void handleCardEffect(CardEffect* effect);
 
 public:
 
     Game();
 
+
     void setUp();
     void takeTurn();
     void play();
-
     void addPlayer(Player* player);
+    // getters and setters
+    int get_turnIndex();
+    void set_turnIndex(int index);
+
+    int get_turnDirection();
+    void set_turnDirection(int direction);
 };
 
 #endif // GAME_H
