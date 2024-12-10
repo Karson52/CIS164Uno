@@ -58,6 +58,7 @@ int choice;
             card* drawnCard = drawDeck.drawCard();
             hand.push_back(drawnCard);  //Add the drawn card to the player's hand.
             cout << "You drew a card: " << drawnCard->get_name() << endl;
+            //TODO maybe remove this line? turn shouldnt end after drawing
             break;
         } else {
             cout << "Invalid choice. Try again." << endl;

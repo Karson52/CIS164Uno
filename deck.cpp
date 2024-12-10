@@ -1,6 +1,7 @@
 #include "deck.h"
 #include "card.h"
 #include "cardeffect.h"
+#include <algorithm>
 
 using namespace std;
 Deck::Deck() {
@@ -51,8 +52,9 @@ void Deck::fillDeck(){
     return;
 }
 
-//TODO: make a function for suffling the deck of cards
+// A function to shuffle the cards
 void Deck::shuffle(){
+    random_shuffle(cards.begin(), cards.end());
     return;
 }
 
