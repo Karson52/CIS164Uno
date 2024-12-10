@@ -15,11 +15,11 @@ shared_ptr<CardEffect> Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
     card* cardPlayed = nullptr;
 
     cout << "It is " << name << "'s turn." << endl;
-    cout << "Face up card: " << playedDeck.peekCard() << endl;
-    cout << "Your hand: " << handToString() << endl;
 
     int choice;
     do {
+        cout << "Face up card: " << playedDeck.peekCard()->get_name() << endl;
+        cout << "Your hand: " << handToString() << endl;
         cout << "Type 1 to play a card, or 2 to draw a card: ";
         cin >> choice;
 
@@ -75,6 +75,14 @@ string Player::handToString(){
     }
     return handString;
 }
+// return true if the player's hand is empty.
+bool Player::hasWon(){
+    if(hand.empty()){
+        return true;
+    }
+    return false;
+}
+
 //getters and setters
 string Player::get_name(){
     return name;
