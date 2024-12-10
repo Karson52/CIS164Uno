@@ -11,15 +11,15 @@ Player::Player(string name){
     set_name(name);
 }
 //this is the function we will call on the player who's turn it is. They will chose to play a card or draw.
-shared_ptr<CardEffect> Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
+shared_ptr<CardEffect> Player::takeTurn(shared_ptr<Deck> drawDeck, shared_ptr<Deck> playedDeck) {
     //Holds the pointer of the card that the player chooses to play.
-    card* cardPlayed = nullptr;
+    shared_ptr<card> cardPlayed = nullptr;
 
     cout << "It is " << name << "'s turn." << endl;
 
     int choice;
     do {
-        cout << "Face up card: " << playedDeck.peekCard()->get_name() << endl;
+        cout << "Face up card: " << playedDeck->peekCard()->get_name() << endl;
         cout << "Your hand: " << handToString() << endl;
         cout << "Type 1 to play a card, or 2 to draw a card: ";
         cin >> choice;
@@ -30,12 +30,12 @@ shared_ptr<CardEffect> Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
             cin >> cardIndex;
 
             if ((cardIndex >= 0) && (cardIndex < hand.size())) {
-                card* chosenCard = hand[cardIndex];
+                shared_ptr<card> chosenCard = hand[cardIndex];
 
-                if (checkLegality(*chosenCard, *playedDeck.peekCard())) {
+                if (checkLegality(chosenCard, playedDeck->peekCard())) {
                     cardPlayed = chosenCard;
                     hand.erase(hand.begin() + cardIndex); //Remove the card from hand.
-                    playedDeck.playCard(cardPlayed);      //Place the card on the played deck.
+                    playedDeck->playCard(cardPlayed);      //Place the card on the played deck.
                     cout << "You played: " << cardPlayed->get_name() << endl;
                     break;  //End turn after successfully playing a card.
                 } else {
@@ -45,7 +45,7 @@ shared_ptr<CardEffect> Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
                 cout << "Invalid card index. Try again." << endl;
             }
         } else if (choice == 2) {
-            card* drawnCard = drawDeck.drawCard();
+            shared_ptr<card> drawnCard = drawDeck->drawCard();
             hand.push_back(drawnCard);  // Add the drawn card to the player's hand.
             cout << "You drew a card: " << drawnCard->get_name() << endl;
             //Continue the turn after drawing a card (no break here).
@@ -64,18 +64,18 @@ shared_ptr<CardEffect> Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
 
 
 // TODO: write a function to validate if a card is playable or not by comparing it to the face up card.
-bool Player::checkLegality(card chosenCard, card faceUpCard){
+bool Player::checkLegality(shared_ptr<card> chosenCard, shared_ptr<card> faceUpCard){
     //compares the card played and the card on the top of the play deck
     cout <<"check legality"<<endl;
-    if (chosenCard.get_rank() == faceUpCard.get_rank()) {
+    if (chosenCard->get_rank() == faceUpCard->get_rank()) {
         return true;
     }
 
-    if (chosenCard.get_color() == faceUpCard.get_color()) {
+    if (chosenCard->get_color() == faceUpCard->get_color()) {
         return true;
     }
 
-    if (chosenCard.get_color() == "Wild") {
+    if (chosenCard->get_color() == "Wild") {
         return true;
     }
 
@@ -103,7 +103,7 @@ bool Player::hasWon(){
     return false;
 }
 // player draws the card into their hand
-void Player::draw(card* card){
+void Player::draw(shared_ptr<card> card){
     hand.push_back(card);
 }
 

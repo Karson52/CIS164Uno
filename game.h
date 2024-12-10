@@ -14,8 +14,8 @@ private:
 
     vector<shared_ptr<Player>> players;
 
-    Deck drawDeck;
-    Deck playedDeck;
+    shared_ptr<Deck> drawDeck;
+    shared_ptr<Deck> playedDeck;
 
     int turnDirection;
     int turnIndex;

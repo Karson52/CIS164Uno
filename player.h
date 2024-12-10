@@ -11,9 +11,9 @@ class Player
 private:
 
     string name;
-    vector<card*> hand;
+    vector<shared_ptr<card>> hand;
     string handToString();
-    bool checkLegality(card chosenCard, card faceUpCard);
+    bool checkLegality(shared_ptr<card> chosenCard, shared_ptr<card> faceUpCard);
 
 public:
 
@@ -21,12 +21,12 @@ public:
     Player(string name);
 
     bool hasWon();
-    shared_ptr<CardEffect> takeTurn(Deck &drawDeck, Deck &playedDeck);
+    shared_ptr<CardEffect> takeTurn(shared_ptr<Deck> drawDeck, shared_ptr<Deck> playedDeck);
 
     string get_name();
     void set_name(string name);
 
-    void draw(card* card);
+    void draw(shared_ptr<card> card);
 
 };
 

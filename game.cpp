@@ -21,21 +21,21 @@ Game::Game() {
     gameWon = false;
 
     // This is the deck players will be drawing card from.
-    drawDeck = Deck();
+    drawDeck = shared_ptr<Deck> (new Deck());
 
     // This is the deck players will be playing cards onto.
-    playedDeck = Deck();
+    playedDeck = shared_ptr<Deck> (new Deck());
 
 }
 
 void Game::setUp(){
 
     // fill and shuffle the draw deck.
-    drawDeck.fillDeck();
-    drawDeck.shuffle();
+    drawDeck->fillDeck();
+    drawDeck->shuffle();
 
     // flip a card from the draw deck to the played deck to be the initial face up card.
-    playedDeck.playCard(drawDeck.drawCard());
+    playedDeck->playCard(drawDeck->drawCard());
 
     deal();
 }
@@ -73,8 +73,8 @@ void Game::play()
         takeTurn();
 
         // Check if the draw deck is empty and needs to be repfilled.
-        if (drawDeck.isEmpty()) {
-            drawDeck.fillDeck();
+        if (drawDeck->isEmpty()) {
+            drawDeck->fillDeck();
         }
     }
 }
@@ -82,7 +82,7 @@ void Game::play()
 void Game::deal() {
     for(int i = 0; i < 7; i++){
         for(int j = 0; j < maxPlayers; j++){
-            players[j]->draw(drawDeck.drawCard());
+            players[j]->draw(drawDeck->drawCard());
         }
     }
 }

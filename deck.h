@@ -9,7 +9,7 @@ class Deck
 private:
 
     // vector of pointers to card objects
-    vector<card*> cards;
+    vector<shared_ptr<card>> cards;
 
 
 public:
@@ -18,9 +18,9 @@ public:
 
     void fillDeck();
     void shuffle();
-    card *drawCard();
-    card *peekCard();
-    void playCard(card* playedCard);
+    shared_ptr<card> drawCard();
+    shared_ptr<card> peekCard();
+    void playCard(shared_ptr<card> playedCard);
     bool isEmpty();
 
 };
