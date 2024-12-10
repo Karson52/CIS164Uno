@@ -26,6 +26,8 @@ public:
     string get_name();
     void set_name(string name);
 
+    void draw(card* card);
+
 };
 
 #endif // PLAYER_H

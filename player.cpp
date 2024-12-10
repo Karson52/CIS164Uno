@@ -82,6 +82,10 @@ bool Player::hasWon(){
     }
     return false;
 }
+// player draws the card into their hand
+void Player::draw(card* card){
+    hand.push_back(card);
+}
 
 //getters and setters
 string Player::get_name(){
