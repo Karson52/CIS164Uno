@@ -1,6 +1,7 @@
 #include "player.h"
 #include "deck.h"
 #include "card.h"
+#include <limits>
 #include <iostream>
 
 Player::Player() {
@@ -28,7 +29,7 @@ shared_ptr<CardEffect> Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
             cout << "Select the card index to play (starting from 0): ";
             cin >> cardIndex;
 
-            if (cardIndex >= 0 && cardIndex < hand.size()) {
+            if ((cardIndex >= 0) && (cardIndex < hand.size())) {
                 card* chosenCard = hand[cardIndex];
 
                 if (checkLegality(*chosenCard, *playedDeck.peekCard())) {
@@ -50,6 +51,9 @@ shared_ptr<CardEffect> Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
             //Continue the turn after drawing a card (no break here).
         } else {
             cout << "Invalid choice. Try again." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
         }
     } while (true);
 
@@ -61,8 +65,24 @@ shared_ptr<CardEffect> Player::takeTurn(Deck &drawDeck, Deck &playedDeck) {
 
 // TODO: write a function to validate if a card is playable or not by comparing it to the face up card.
 bool Player::checkLegality(card chosenCard, card faceUpCard){
+    //compares the card played and the card on the top of the play deck
+    cout <<"check legality"<<endl;
+    if (chosenCard.get_rank() == faceUpCard.get_rank()) {
+        return true;
+    }
 
+    if (chosenCard.get_color() == faceUpCard.get_color()) {
+        return true;
+    }
+
+    if (chosenCard.get_color() == "Wild") {
+        return true;
+    }
+
+    //if nothing matches or the card doesnt have an effect return that is is not a good move
+    return false;
 }
+
 
 // A function for converting the hand into a string.
 string Player::handToString(){
@@ -71,7 +91,7 @@ string Player::handToString(){
     // Loop over all of the cards, getting the card name and adding a space between each one.
     for(int i = 0; i < hand.size(); i ++){
         handString.append(hand[i]->get_name());
-            handString.append(" ");
+            handString.append(", ");
     }
     return handString;
 }
